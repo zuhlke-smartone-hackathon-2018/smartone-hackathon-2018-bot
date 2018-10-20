@@ -27,7 +27,7 @@ const GREETING_INTENT = 'Greeting';
 const CANCEL_INTENT = 'Cancel';
 const HELP_INTENT = 'Help';
 const NONE_INTENT = 'None';
-const CALL_ELEVATOR = 'Call Elevator';
+const CALL_ELEVATOR = 'Call_Elevator';
 
 // Supported LUIS Entities, defined in ./dialogs/greeting/resources/greeting.lu
 const USER_NAME_ENTITIES = ['userName', 'userName_patternAny'];
