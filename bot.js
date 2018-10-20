@@ -30,17 +30,19 @@ const NONE_INTENT = 'None';
 const CALL_ELEVATOR = 'Call_Elevator';
 const ELEVATOR_ACTION_INTENT = 'ElevatorAction';
 const INFORM_INTENT = 'Inform';
+const SHOW_INTENT = 'Show';
 
 // Supported LUIS Entities, defined in ./dialogs/greeting/resources/greeting.lu
 const USER_NAME_ENTITIES = ['userName', 'userName_patternAny'];
 const USER_LOCATION_ENTITIES = ['userLocation', 'userLocation_patternAny'];
 
 // ELEVATOR response
-const ELEVATOR_RESPONSE = `The lift is there in 10 seconds. Please take an umbrella there is light rain.`;
+const ELEVATOR_RESPONSE = `The lift is there in 10 seconds. Better take an umbrella, there is light rain.`;
 const ELEVATOR_ARRIVED_MSG = `The lift is here`;
 const ELEVATOR_ACTION_RESPONSE = `OK. I will inform the tenants who are at home and those who are expected to come home soon.`;
-const GREETING_RESPONSE = `I´m good thanks. There are two things today: Firstly, my lift will be maintained at 2pm for one hour. Secondly, there was a water leakage in Flat 10A reported and I informed the plumber.`;
-const INFORM_RESPONSE = `Will do.`;
+const GREETING_RESPONSE = `Good Morning, Mr. Lee. There are two things today: Firstly, my lift will be maintained at 2pm for one hour. Secondly, there was a water leakage in Flat 10 B reported and I informed the plumber.`;
+const INFORM_RESPONSE = `Sure. I Will WhatsApp you.`;
+const SHOW_RESPONSE = `Here is the chart`;
 const MESSAGE_DELAY = 5000;
 /**
  * Demonstrates the following concepts:
@@ -151,6 +153,9 @@ class BasicBot {
                         break;
                     case INFORM_INTENT:
                         await dc.context.sendActivity(INFORM_RESPONSE);
+                        break;
+                    case SHOW_INTENT:
+                        await dc.context.sendActivity(SHOW_RESPONSE);
                         break;
                     case NONE_INTENT:
                     default:
