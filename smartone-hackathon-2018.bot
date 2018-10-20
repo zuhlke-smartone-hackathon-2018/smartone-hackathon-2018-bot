@@ -1,0 +1,50 @@
+{
+  "name": "smartone-hackathon-2018",
+  "padlock": "pxJc3D1DXV06teeU9tvTKA==!IPAls/rKlgTWxNKkNpiaWo5s812evkN1XI7Fe7XLoE4ANf6NE86u+SkhyS9kz6/O",
+  "version": "2.0",
+  "services": [
+    {
+      "tenantId": "c54fdd71-8e63-47ae-ac6f-ed5c0e575568",
+      "subscriptionId": "73e0a4c4-2dcf-429b-9b1c-4857c38a0172",
+      "resourceGroup": "smartone-hack",
+      "serviceName": "smartone-hackathon-2018",
+      "type": "abs",
+      "name": "smartone-hackathon-2018",
+      "id": "1"
+    },
+    {
+      "connectionString": "NGA9r6ztS5heZs2NuzMzKQ==!OuR/+JtlnRsLaCxcnceVe0vfGZMvzjOVUYveLGG3r/JBVJXL3VxjmhJ2/13dxw2AET6qlEztpf9DO+mmjjPAWgN47DtYeJT/u5WzYgyHUd/+nYyOZEl1qUrDL4nLkLGvHnxachg/stcMGqEZKw194BoYrh1FiP02cAZFKJ7vc+qV90EEnnW261L9zinF6pmW5Jmuqm7AshuelJtuIhIc1+SDIScDrHGOQFHCyqk+Uuc=",
+      "tenantId": "c54fdd71-8e63-47ae-ac6f-ed5c0e575568",
+      "subscriptionId": "73e0a4c4-2dcf-429b-9b1c-4857c38a0172",
+      "resourceGroup": "smartone-hack",
+      "serviceName": "smartonehackathon201884a",
+      "type": "blob",
+      "id": "2"
+    },
+    {
+      "appId": "",
+      "appPassword": "",
+      "endpoint": "http://localhost:3978/api/messages",
+      "type": "endpoint",
+      "name": "development",
+      "id": "3"
+    },
+    {
+      "appId": "3f7aa5d9-50b8-4bfe-86d3-8af6c6c8abd1",
+      "appPassword": "cLPm0KHiPWWXKMtnk8rBJA==!dXUQOrnXbwX+MeEsJynoANiDvrsU5g1LESfKgh9zJhs=",
+      "endpoint": "https://smartone-hackathon-2018.azurewebsites.net/api/messages",
+      "type": "endpoint",
+      "name": "production",
+      "id": "4"
+    },
+    {
+      "appId": "0f692181-f333-4fee-95b8-d4ba9972c6c1",
+      "authoringKey": "2nEbBnvFwNcEmki1ZIHsjg==!qPqGB+OvqcAcxg/GfgYynW4IpUSAGAaFjzIcbdrnTdHU/WLAV2pebuP9Uv8B128y",
+      "version": "0.1",
+      "region": "westus",
+      "type": "luis",
+      "name": "BasicBotLuisApplication",
+      "id": "5"
+    }
+  ]
+}
