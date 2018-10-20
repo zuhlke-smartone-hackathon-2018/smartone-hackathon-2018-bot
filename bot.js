@@ -28,6 +28,7 @@ const CANCEL_INTENT = 'Cancel';
 const HELP_INTENT = 'Help';
 const NONE_INTENT = 'None';
 const CALL_ELEVATOR = 'Call_Elevator';
+const ELEVATOR_ACTION_INTENT = 'ElevatorAction';
 
 // Supported LUIS Entities, defined in ./dialogs/greeting/resources/greeting.lu
 const USER_NAME_ENTITIES = ['userName', 'userName_patternAny'];
@@ -36,6 +37,8 @@ const USER_LOCATION_ENTITIES = ['userLocation', 'userLocation_patternAny'];
 // ELEVATOR response
 const ELEVATOR_RESPONSE = `The lift is there in 10 seconds. Please take an umbrella there is light rain.`;
 const ELEVATOR_ARRIVED_MSG = `The lift is here`;
+const ELEVATOR_ACTION_RESPONSE = `OK. I will inform the tenants who are at home and those who are expected to come home soon.`;
+const GREETING_RESPONSE = `Hi Building, how are you?” Building: ”I´m good thanks. There are two things today: Firstly, my lift will be maintained at 2pm for one hour. Secondly, there was a water leakage in Flat 10A reported and I informed the plumber.`;
 const MESSAGE_DELAY = 5000;
 /**
  * Demonstrates the following concepts:
@@ -138,13 +141,17 @@ class BasicBot {
                         await dc.context.sendActivity(ELEVATOR_RESPONSE);
                         await this.delayMessage(dc, ELEVATOR_ARRIVED_MSG);
                         break;
-                    case NONE_INTENT:
                     case GREETING_INTENT:
+                        await dc.context.sendActivity(GREETING_RESPONSE);
+                        break;
+                    case ELEVATOR_ACTION_INTENT:
+                        await dc.context.sendActivity(ELEVATOR_ACTION_RESPONSE);
+                        break;
+                    case NONE_INTENT:
                     default:
                         // None or no intent identified, either way, let's provide some help
                         // to the user
-                        await dc.context.sendActivity(ELEVATOR_RESPONSE);
-                        await this.delayMessage(dc, ELEVATOR_ARRIVED_MSG);
+                        await dc.context.sendActivity(`Sorry I don't understand, please speak again. (Intent ${ topIntent })`);
                         break;
                     }
                     break;
@@ -208,7 +215,7 @@ class BasicBot {
 
         if (topIntent === HELP_INTENT) {
             await dc.context.sendActivity(`Let me try to provide some help.`);
-            await dc.context.sendActivity(`I understand greetings, being asked for help, or being asked to cancel what I am doing.`);
+            await dc.context.sendActivity(`I understand 'please call the lift', 'Hi Building, how are you?'`);
             return true; // this is an interruption
         }
         return false; // this is not an interruption
