@@ -27,6 +27,7 @@ const GREETING_INTENT = 'Greeting';
 const CANCEL_INTENT = 'Cancel';
 const HELP_INTENT = 'Help';
 const NONE_INTENT = 'None';
+const CALL_ELEVATOR = 'Call Elevator';
 
 // Supported LUIS Entities, defined in ./dialogs/greeting/resources/greeting.lu
 const USER_NAME_ENTITIES = ['userName', 'userName_patternAny'];
@@ -121,6 +122,9 @@ class BasicBot {
                 dialogResult = await dc.continueDialog();
             }
 
+            const randomSecs = this.randomSecondGenerator();
+            const elevatorResponse = `The Lift is there in ${ randomSecs } seconds. Please take an umbrella there is light rain.`;
+
             // If no active dialog or no active dialog has responded,
             if (!dc.context.responded) {
                 // Switch on return results from any active dialog.
@@ -129,14 +133,15 @@ class BasicBot {
                 case DialogTurnStatus.empty:
                     // Determine what we should do based on the top intent from LUIS.
                     switch (topIntent) {
-                    case GREETING_INTENT:
-                        await dc.beginDialog(GREETING_DIALOG);
+                    case CALL_ELEVATOR:
+                        await dc.context.sendActivity(elevatorResponse);
                         break;
                     case NONE_INTENT:
+                    case GREETING_INTENT:
                     default:
                         // None or no intent identified, either way, let's provide some help
                         // to the user
-                        await dc.context.sendActivity(`I didn't understand what you just said to me.`);
+                        await dc.context.sendActivity(`I didn't understand what you just said to me. Intent: ${ topIntent }`);
                         break;
                     }
                     break;
@@ -238,6 +243,10 @@ class BasicBot {
             // set the new values
             await this.userProfileAccessor.set(context, userProfile);
         }
+    }
+
+    randomSecondGenerator() {
+        return Math.floor((Math.random() * 20) + 1);
     }
 }
 
