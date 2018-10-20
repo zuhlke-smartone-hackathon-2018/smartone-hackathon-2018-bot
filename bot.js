@@ -33,6 +33,10 @@ const CALL_ELEVATOR = 'Call_Elevator';
 const USER_NAME_ENTITIES = ['userName', 'userName_patternAny'];
 const USER_LOCATION_ENTITIES = ['userLocation', 'userLocation_patternAny'];
 
+// ELEVATOR response
+const ELEVATOR_RESPONSE = `The lift is there in 10 seconds. Please take an umbrella there is light rain.`;
+const ELEVATOR_ARRIVED_MSG = `The lift is here`;
+const MESSAGE_DELAY = 5000;
 /**
  * Demonstrates the following concepts:
  *  Displaying a Welcome Card, using Adaptive Card technology
@@ -122,9 +126,6 @@ class BasicBot {
                 dialogResult = await dc.continueDialog();
             }
 
-            const randomSecs = this.randomSecondGenerator();
-            const elevatorResponse = `The Lift is there in ${ randomSecs } seconds. Please take an umbrella there is light rain.`;
-
             // If no active dialog or no active dialog has responded,
             if (!dc.context.responded) {
                 // Switch on return results from any active dialog.
@@ -134,14 +135,16 @@ class BasicBot {
                     // Determine what we should do based on the top intent from LUIS.
                     switch (topIntent) {
                     case CALL_ELEVATOR:
-                        await dc.context.sendActivity(elevatorResponse);
+                        await dc.context.sendActivity(ELEVATOR_RESPONSE);
+                        await this.delayMessage(dc, ELEVATOR_ARRIVED_MSG);
                         break;
                     case NONE_INTENT:
                     case GREETING_INTENT:
                     default:
                         // None or no intent identified, either way, let's provide some help
                         // to the user
-                        await dc.context.sendActivity(`I didn't understand what you just said to me. Intent: ${ topIntent }`);
+                        await dc.context.sendActivity(ELEVATOR_RESPONSE);
+                        await this.delayMessage(dc, ELEVATOR_ARRIVED_MSG);
                         break;
                     }
                     break;
@@ -245,9 +248,16 @@ class BasicBot {
         }
     }
 
-    randomSecondGenerator() {
-        return Math.floor((Math.random() * 20) + 1);
+    async delayMessage(dc, message) {
+        await this.delay(MESSAGE_DELAY);
+        dc.context.sendActivity(message);
     }
+
+    delay(interval) {
+        return new Promise((resolve) => {
+            setTimeout(resolve, interval);
+        });
+    };
 }
 
 module.exports.BasicBot = BasicBot;
