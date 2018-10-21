@@ -161,7 +161,7 @@ class BasicBot {
                     default:
                         // None or no intent identified, either way, let's provide some help
                         // to the user
-                        await dc.context.sendActivity(`Sorry I don't understand, please speak again. (Intent ${ topIntent })`);
+                        await dc.context.sendActivity(`Sorry I don't understand, please speak again.`);
                         break;
                     }
                     break;
